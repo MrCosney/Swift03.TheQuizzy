@@ -12,6 +12,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        view.backgroundColor = UIColor(rgb: 0x171723)
         // Do any additional setup after loading the view.
     }
 
