@@ -8,7 +8,8 @@
 import UIKit
 
 class QuestionViewController: UIViewController {
-
+    
+    //MARK: - Properties
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -24,12 +25,12 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var singleStackView: UIStackView!
     @IBOutlet var singleButtons: [UIButton]!
-
+    
     @IBOutlet weak var multipleStackView: UIStackView!
     @IBOutlet var multipleSwitchers: [UISwitch]!
     @IBOutlet var multipleLabels: [UILabel]!
     
-
+    
     @IBOutlet weak var sliderStackView: UIStackView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet var sliderLabels: [UILabel]!
@@ -41,6 +42,7 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var questionLabel: UILabel!
     
+    //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
@@ -65,17 +67,24 @@ class QuestionViewController: UIViewController {
         case .multiple:
             updateMultipleStackView()
         case .slider:
-            ""
+            updateSliderView()
         case .picker:
-            ""
+            updatePickerView()
         }
         
     }
     
+    private func updateSliderView() {
+    }
+    
+    private func updatePickerView() {
+        
+    }
     private func updateMultipleStackView() {
         multipleStackView.isHidden = false
     }
     
+    ///Show and Update the StackView with Single Possible Answer
     private func updateSingleStackView() {
         singleStackView.isHidden = false
         for (index, button) in singleButtons.enumerated() {
@@ -90,6 +99,7 @@ class QuestionViewController: UIViewController {
         }
     }
     
+    // FIXME: -Fix status bar!!!
     
     private func setupNavBarSettings(){
         //Setup colors
@@ -97,10 +107,10 @@ class QuestionViewController: UIViewController {
         view.backgroundColor = UIColor(rgb: 0x171723)
         progressView.progressTintColor = UIColor(rgb: 0x5A40D6)
         
-//        //Setup Navigation Title
+        //        //Setup Navigation Title
         let titleAttributes = [NSAttributedString.Key.font: UIFont(name: "Thintel", size: fontSize)]
         self.navigationController?.navigationBar.titleTextAttributes = titleAttributes as [NSAttributedString.Key : Any]
     }
     
-
+    
 }
