@@ -23,13 +23,13 @@ class QuestionViewController: UIViewController {
         Question.all[questionIndex]
     }
     
+    private var answersChosen = [Answer]()
+    
     @IBOutlet weak var singleStackView: UIStackView!
     @IBOutlet var singleButtons: [UIButton]!
     
     @IBOutlet weak var multipleStackView: UIStackView!
-    @IBOutlet var multipleSwitchers: [UISwitch]!
-    @IBOutlet var multipleLabels: [UILabel]!
-    
+    @IBOutlet var multipleButtons: [UIButton]!
     
     @IBOutlet weak var sliderStackView: UIStackView!
     @IBOutlet weak var slider: UISlider!
@@ -42,18 +42,21 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var questionLabel: UILabel!
     
+    @IBOutlet weak var confirmAnswerButton: UIButton!
+    
+    // Height constraints for Confirm Button and Label
+    @IBOutlet weak var questionLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var confirmButtonHeightConstraint: NSLayoutConstraint!
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
-        slider.maximumValue = 0.99999
-        questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
-        setupNavBarSettings()
+        questionWindowSettings()
         updateUI()
     }
     
     private func updateUI() {
         let progress = Float(questionIndex) / Float(Question.all.count)
+        
         navigationItem.title = "Вопрос  # \(questionIndex + 1)"
         questionLabel.text = currentQuestion.text
         progressView.setProgress(progress, animated: true)
@@ -61,6 +64,11 @@ class QuestionViewController: UIViewController {
         for stackView in [singleStackView, multipleStackView, sliderStackView, pickerStackView] {
             stackView?.isHidden = true
         }
+        for button in multipleButtons {
+            button.isSelected = false
+        }
+        confirmAnswerButton.isHidden = true
+        
         switch currentQuestion.type {
         case .single:
             updateSingleStackView()
@@ -80,37 +88,95 @@ class QuestionViewController: UIViewController {
     private func updatePickerView() {
         
     }
-    private func updateMultipleStackView() {
-        multipleStackView.isHidden = false
-    }
     
-    ///Show and Update the StackView with Single Possible Answer
-    private func updateSingleStackView() {
-        singleStackView.isHidden = false
-        for (index, button) in singleButtons.enumerated() {
+    /// Set the Background Image and Font Colours to Buttons
+    private func setupButtonsStyle(buttonArray: [UIButton]) {
+        for (index, button) in buttonArray.enumerated() {
             button.setTitle(nil, for: [])
             button.tag = index
-            button.setBackgroundImage(UIImage(named: "selectButton"), for: [])
+            button.setBackgroundImage(UIImage(named: "selectButton"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "selectButtonPressed"), for: .selected)
+            button.setTitleColor(.white, for: .selected)
             button.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
             button.tintColor = .black
         }
+    }
+    ///Show and Update the StackView with Single Possible Answer
+    private func updateSingleStackView() {
+        singleStackView.isHidden = false
+        setupButtonsStyle(buttonArray: singleButtons)
         for (button, answer) in zip(singleButtons, currentAnswer) {
             button.setTitle(answer.text, for: [])
         }
     }
-    
-    // FIXME: -Fix status bar!!!
-    
-    private func setupNavBarSettings(){
-        //Setup colors
-        navigationController?.navigationBar.barTintColor = UIColor(rgb: 0x5A40D6)
-        view.backgroundColor = UIColor(rgb: 0x171723)
-        progressView.progressTintColor = UIColor(rgb: 0x5A40D6)
-        
-        //        //Setup Navigation Title
-        let titleAttributes = [NSAttributedString.Key.font: UIFont(name: "Thintel", size: fontSize)]
-        self.navigationController?.navigationBar.titleTextAttributes = titleAttributes as [NSAttributedString.Key : Any]
+
+    private func updateMultipleStackView() {
+        confirmAnswerButton.isHidden = false
+        multipleStackView.isHidden = false
+        setupButtonsStyle(buttonArray: multipleButtons)
+        for (button, answer) in zip(multipleButtons, currentAnswer) {
+            button.setTitle(answer.text, for: [])
+        }
     }
     
+    // FIXME: -Fix status bar!!! Don't forget to clean the answer list after getting the result!!!
+    
+    private func questionWindowSettings() {
+        slider.maximumValue = 500
+        fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
+        questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
+
+        //Setup colors
+        navigationController?.navigationBar.barTintColor = UIColor(rgb: 0xA30EB3)
+        view.backgroundColor = UIColor(rgb: 0x171723)
+        progressView.progressTintColor = UIColor(rgb: 0xA30EB3)
+        
+        //Setup Navigation Title
+        let titleAttributes = [NSAttributedString.Key.font: UIFont(name: "Thintel", size: fontSize)]
+        self.navigationController?.navigationBar.titleTextAttributes = titleAttributes as [NSAttributedString.Key : Any]
+        
+        //Setup Constraints
+        confirmButtonHeightConstraint.constant = view.frame.maxY / 15
+        questionLabelHeightConstraint.constant = view.frame.maxY / 10
+        
+        //Setup Confirm Button
+        confirmAnswerButton.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
+        confirmAnswerButton.setBackgroundImage(UIImage(named: "confirmButton"), for: .normal)
+        confirmAnswerButton.setTitleColor(.white, for: [])
+    }
+    
+    private func nextQuestion() {
+        print(answersChosen)
+        questionIndex += 1
+        if questionIndex < Question.all.count {
+            updateUI()
+        } else {
+            performSegue(withIdentifier: "Results Screen", sender: nil)
+        }
+    }
+    
+    @IBAction func singleButtonPressed(_ sender: UIButton) {
+        let index = sender.tag
+        let answers = Question.all[questionIndex].answers
+        guard index >= 0 && index <= answers.count else {
+            return
+        }
+        let answerSelected = answers[index]
+        answersChosen.append(answerSelected)
+        nextQuestion()
+    }
+    
+    @IBAction func multipleButtonPressed(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    @IBAction func confirmAnswerPressed(_ sender: UIButton) {
+        for (index, button) in multipleButtons.enumerated() {
+            if button.isSelected && index < currentAnswer.count {
+                let answer = currentAnswer[index]
+                answersChosen.append(answer)
+            }
+        }
+        nextQuestion()
+    }
     
 }

@@ -27,7 +27,7 @@ struct Question {
             Answer(text: "Капучино", person: .fibi),
             Answer(text: "Какао", person: .rachel)
         ].shuffled()),
-        Question(text: "Мой талант это: ", type: .multiple, answers: [
+        Question(text: "Мои талант(ы) это:", type: .multiple, answers: [
             Answer(text: "Гитара", person: .fibi),
             Answer(text: "Смешные шутки", person: .chandler),
             Answer(text: "Ум", person: .rose),
@@ -43,5 +43,5 @@ struct Question {
             Answer(text: "Секс", person: .rose),
             Answer(text: "Секс!", person: .fibi)
         ].shuffled()),
-        ].shuffled()
+        ]
 }
