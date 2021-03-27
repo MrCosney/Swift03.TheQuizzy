@@ -67,7 +67,7 @@ class QuestionViewController: UIViewController {
         for button in multipleButtons {
             button.isSelected = false
         }
-        confirmAnswerButton.isHidden = true
+        confirmAnswerButton.isHidden = false
         
         switch currentQuestion.type {
         case .single:
@@ -81,10 +81,6 @@ class QuestionViewController: UIViewController {
         }
         
     }
-    
-    private func updateSliderView() {
-    }
-    
     private func updatePickerView() {
         
     }
@@ -104,6 +100,7 @@ class QuestionViewController: UIViewController {
     ///Show and Update the StackView with Single Possible Answer
     private func updateSingleStackView() {
         singleStackView.isHidden = false
+        confirmAnswerButton.isHidden = true
         setupButtonsStyle(buttonArray: singleButtons)
         for (button, answer) in zip(singleButtons, currentAnswer) {
             button.setTitle(answer.text, for: [])
@@ -111,7 +108,6 @@ class QuestionViewController: UIViewController {
     }
 
     private func updateMultipleStackView() {
-        confirmAnswerButton.isHidden = false
         multipleStackView.isHidden = false
         setupButtonsStyle(buttonArray: multipleButtons)
         for (button, answer) in zip(multipleButtons, currentAnswer) {
@@ -119,10 +115,15 @@ class QuestionViewController: UIViewController {
         }
     }
     
+    private func updateSliderView() {
+        sliderStackView.isHidden = false
+        sliderLabels.first?.text = currentAnswer.first?.text
+        sliderLabels.last?.text = currentAnswer.last?.text
+    }
+    
     // FIXME: -Fix status bar!!! Don't forget to clean the answer list after getting the result!!!
     
     private func questionWindowSettings() {
-        slider.maximumValue = 500
         fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
         questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
 
@@ -143,6 +144,12 @@ class QuestionViewController: UIViewController {
         confirmAnswerButton.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
         confirmAnswerButton.setBackgroundImage(UIImage(named: "confirmButton"), for: .normal)
         confirmAnswerButton.setTitleColor(.white, for: [])
+        
+        //Setup slider Labels colors/font
+        for label in sliderLabels {
+            label.font = UIFont(name: "Thintel", size: fontSize)
+            label.textColor = .white
+        }
     }
     
     private func nextQuestion() {
@@ -170,13 +177,27 @@ class QuestionViewController: UIViewController {
         sender.isSelected.toggle()
     }
     @IBAction func confirmAnswerPressed(_ sender: UIButton) {
-        for (index, button) in multipleButtons.enumerated() {
-            if button.isSelected && index < currentAnswer.count {
-                let answer = currentAnswer[index]
-                answersChosen.append(answer)
+        
+        switch currentQuestion.type {
+        case .single:
+            break
+        case .multiple :
+            for (index, button) in multipleButtons.enumerated() {
+                if button.isSelected && index < currentAnswer.count {
+                    let answer = currentAnswer[index]
+                    answersChosen.append(answer)
+                }
             }
+        case .slider:
+            answersChosen.append(currentAnswer[Int(slider.value)])
+        default:
+            fatalError()
         }
         nextQuestion()
-    }
+        }
     
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        let roundStepValue = round(sender.value / 1) * 1
+        sender.value = roundStepValue
+    }
 }

@@ -35,13 +35,13 @@ struct Question {
             Answer(text: "Есть и не толстеть", person: .joey),
             Answer(text: "Мода", person: .rachel)
         ].shuffled()),
-        Question(text: "Что бы ты выбрал: секс или еда?", type: .multiple, answers: [
+        Question(text: "Что бы ты выбрал: секс или еда?", type: .slider, answers: [
             Answer(text: "Еда!", person: .monica),
             Answer(text: "Еда", person: .chandler),
             Answer(text: "Затрудняюсь ответить", person: .rachel),
             Answer(text: "Cекс с перервыом на еду", person: .joey),
             Answer(text: "Секс", person: .rose),
             Answer(text: "Секс!", person: .fibi)
-        ].shuffled()),
+        ]),
         ]
 }
