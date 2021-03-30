@@ -10,23 +10,23 @@ enum PokemonType: String {
     case squirtle = " СКВИРТЛ"
     case charmander = "ЧАРМАНДЕР"
     case snorlaks = "СНОРЛАКС"
-    case pidgey = "ПИДЖУ"
+    case pidgey = "ПИДЖЕОТ"
     case slowpoke = "СЛОУПОК"
     
     var description: String {
         switch self {
         case .pikachu:
-            return "Обаятельный и очень энергичный покемон, всегда прийдет на помощь своим друзьям!"
+            return "Ты очень энергичный покемон! В тебе настолько много энергии, что ее не удержать в бутылке!"
         case .squirtle:
-            return ""
+            return "Ты очень спокойный и размерянный, но иногда тебя невозможно контролировать!"
         case .charmander:
-            return ""
+            return "Ты горяч как огонь, всегда готовый на новые подвиги и свершения!"
         case .snorlaks:
-            return ""
+            return "Ты достаточно силен, чтобы никому ничего не доказывать и просто отдыхать."
         case .pidgey:
-            return ""
+            return "Ты очень свободный и творческий покемон, предпочитающий ни от кого не зависеть. "
         case .slowpoke:
-            return ""
+            return "Ты настолько погружен в свои размышления, что порой теряешь связь с реальным миром."
         }
         
     }

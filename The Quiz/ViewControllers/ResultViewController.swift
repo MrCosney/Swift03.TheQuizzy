@@ -9,6 +9,7 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
+
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pokemonNameLabel: UILabel!
@@ -27,25 +28,27 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = UIImage(named: "let")
+        //Setup font size for Labels
+        let fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
+        pokemonNameLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
+            pokemonDescriptionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 5))
+        
         imageViewHeightConstraint.constant = view.frame.height / 3
         navigationItem.hidesBackButton = true
         view.backgroundColor = UIColor(rgb: 0x171723)
-        calculatePokemonResult()
+        updateUI()
+    
     }
     
-    private func calculatePokemonResult() {
-
-        let frequencyOfAnswers = answers.reduce(into: [:]) { counts, answer in
+    private func updateUI() {
+        let answersPoints = answers.reduce(into: [:]) { counts, answer in
             counts[answer.person, default: 0] += 1
         }
-        let mostCommonAnswer = frequencyOfAnswers.sorted { $0.value > $1.value }.first!.key
-        updateUI(with: mostCommonAnswer)
-    }
-    
-    private func updateUI(with pokemon: PokemonType) {
-        pokemonNameLabel.text = "Вы - \(pokemon.rawValue)!"
-        pokemonDescriptionLabel.text = pokemon.description
+        let resultedPokemon = answersPoints.sorted { $0.value > $1.value }.first!.key
+        
+        pokemonNameLabel.text = "Ты - \(resultedPokemon.rawValue)!"
+        imageView.image = UIImage(named: String(resultedPokemon.rawValue))
+        pokemonDescriptionLabel.text = resultedPokemon.description
     }
 
 }
