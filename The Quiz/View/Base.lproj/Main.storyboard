@@ -163,16 +163,12 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Hag-YH-AFd">
-                                <rect key="frame" x="30" y="285.5" width="354" height="271"/>
+                                <rect key="frame" x="47" y="256" width="320" height="330"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHU-tl-hQt">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="216"/>
-                                        <color key="tintColor" red="0.46416831019999999" green="0.25300714369999999" blue="0.92773455380000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g44-Mm-iZK">
-                                        <rect key="frame" x="0.0" y="241" width="354" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="v1O-AX-6a5">
@@ -264,6 +260,7 @@
                             <constraint firstItem="ex9-w2-Phz" firstAttribute="top" secondItem="ZQb-Of-VOB" secondAttribute="bottom" constant="50" id="22r-Yq-wTG"/>
                             <constraint firstItem="5wt-HN-1GA" firstAttribute="trailing" secondItem="L00-tu-GHC" secondAttribute="trailing" constant="30" id="3br-lQ-HzA"/>
                             <constraint firstItem="ZQb-Of-VOB" firstAttribute="centerX" secondItem="uaB-dC-7Uq" secondAttribute="centerX" id="4aI-af-nFe"/>
+                            <constraint firstItem="ex9-w2-Phz" firstAttribute="top" secondItem="Hag-YH-AFd" secondAttribute="bottom" constant="50" id="6GE-RS-zMi"/>
                             <constraint firstItem="24G-UL-v1j" firstAttribute="centerX" secondItem="uaB-dC-7Uq" secondAttribute="centerX" id="6uf-nR-7sf"/>
                             <constraint firstItem="bhq-rb-7mJ" firstAttribute="leading" secondItem="5wt-HN-1GA" secondAttribute="leading" constant="30" id="6yi-7B-CKy"/>
                             <constraint firstItem="5wt-HN-1GA" firstAttribute="trailing" secondItem="v1O-AX-6a5" secondAttribute="trailing" constant="30" id="9Ve-ha-8cc"/>
@@ -278,6 +275,7 @@
                             <constraint firstItem="v1O-AX-6a5" firstAttribute="centerY" secondItem="uaB-dC-7Uq" secondAttribute="centerY" id="SrK-pw-FcW"/>
                             <constraint firstItem="5wt-HN-1GA" firstAttribute="top" secondItem="ex9-w2-Phz" secondAttribute="bottom" constant="-630" id="T2W-Ey-FNE"/>
                             <constraint firstItem="ZQb-Of-VOB" firstAttribute="top" secondItem="L00-tu-GHC" secondAttribute="bottom" constant="50" id="Uon-05-Hgx"/>
+                            <constraint firstItem="Hag-YH-AFd" firstAttribute="top" secondItem="L00-tu-GHC" secondAttribute="bottom" constant="50" id="Ws3-UT-WDO"/>
                             <constraint firstItem="ex9-w2-Phz" firstAttribute="leading" secondItem="5wt-HN-1GA" secondAttribute="leading" constant="30" id="Wu5-rq-Hzt"/>
                             <constraint firstItem="bhq-rb-7mJ" firstAttribute="top" secondItem="ex9-w2-Phz" secondAttribute="bottom" priority="5" constant="40" id="XXh-Ns-tmz"/>
                             <constraint firstItem="L00-tu-GHC" firstAttribute="leading" secondItem="5wt-HN-1GA" secondAttribute="leading" constant="30" id="b57-XQ-QIO"/>
@@ -286,14 +284,11 @@
                             <constraint firstItem="v1O-AX-6a5" firstAttribute="centerX" secondItem="uaB-dC-7Uq" secondAttribute="centerX" id="lP4-Zk-82B"/>
                             <constraint firstItem="v1O-AX-6a5" firstAttribute="leading" secondItem="5wt-HN-1GA" secondAttribute="leading" constant="30" id="oER-0e-9QY"/>
                             <constraint firstItem="ex9-w2-Phz" firstAttribute="centerX" secondItem="uaB-dC-7Uq" secondAttribute="centerX" id="pzR-fV-oe0"/>
+                            <constraint firstItem="Hag-YH-AFd" firstAttribute="centerX" secondItem="uaB-dC-7Uq" secondAttribute="centerX" id="r6d-dN-EnY"/>
                             <constraint firstItem="L00-tu-GHC" firstAttribute="top" secondItem="5wt-HN-1GA" secondAttribute="top" constant="50" id="upe-JN-Eiu"/>
                             <constraint firstItem="5wt-HN-1GA" firstAttribute="bottom" secondItem="bhq-rb-7mJ" secondAttribute="bottom" constant="20" id="v0k-Z2-L0p"/>
+                            <constraint firstItem="Hag-YH-AFd" firstAttribute="centerY" secondItem="uaB-dC-7Uq" secondAttribute="centerY" id="w5t-UI-nZL"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Hag-YH-AFd"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="PTx-6c-CaO"/>
                     <connections>

@@ -1,5 +1,5 @@
 //
-//  QusetionViewController.swift
+//  QuestionViewController.swift
 //  The Quiz
 //
 //  Created by Nick on 23.03.2021.
@@ -10,26 +10,26 @@ import UIKit
 class QuestionViewController: UIViewController {
     
     //MARK: - Properties
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
-    private var fontSize: CGFloat = 10
-    private var questionIndex = 0
+    private var answersChosen = [Answer]()
     private var currentAnswer: [Answer] {
         currentQuestion.answers
     }
     private var currentQuestion: Question {
         Question.all[questionIndex]
     }
+    private var fontSize: CGFloat = 10
+    private var pickerAnswers = [String()]
+    private var questionIndex = 0
     
-    private var answersChosen = [Answer]()
     
-    @IBOutlet weak var singleStackView: UIStackView!
-    @IBOutlet var singleButtons: [UIButton]!
+    @IBOutlet weak var confirmAnswerButton: UIButton!
     
     @IBOutlet weak var multipleStackView: UIStackView!
     @IBOutlet var multipleButtons: [UIButton]!
+    
+    @IBOutlet weak var singleStackView: UIStackView!
+    @IBOutlet var singleButtons: [UIButton]!
     
     @IBOutlet weak var sliderStackView: UIStackView!
     @IBOutlet weak var slider: UISlider!
@@ -40,20 +40,33 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var progressView: UIProgressView!
     
-    @IBOutlet weak var questionLabel: UILabel!
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
-    @IBOutlet weak var confirmAnswerButton: UIButton!
+    @IBOutlet weak var questionLabel: UILabel!
     
     // Height constraints for Confirm Button and Label
     @IBOutlet weak var questionLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var confirmButtonHeightConstraint: NSLayoutConstraint!
-    //MARK: - Methods
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         questionWindowSettings()
         updateUI()
     }
     
+    private func nextQuestion() {
+        print(answersChosen)
+        questionIndex += 1
+        if questionIndex < Question.all.count {
+            updateUI()
+        } else {
+            performSegue(withIdentifier: "Results Screen", sender: nil)
+        }
+    }
+    
+    // MARK: - Update View Functions
     private func updateUI() {
         let progress = Float(questionIndex) / Float(Question.all.count)
         
@@ -81,35 +94,17 @@ class QuestionViewController: UIViewController {
         }
         
     }
-    private func updatePickerView() {
-        
-    }
-    
-    /// Set the Background Image and Font Colours to Buttons
-    private func setupButtonsStyle(buttonArray: [UIButton]) {
-        for (index, button) in buttonArray.enumerated() {
-            button.setTitle(nil, for: [])
-            button.tag = index
-            button.setBackgroundImage(UIImage(named: "selectButton"), for: .normal)
-            button.setBackgroundImage(UIImage(named: "selectButtonPressed"), for: .selected)
-            button.setTitleColor(.white, for: .selected)
-            button.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
-            button.tintColor = .black
-        }
-    }
-    ///Show and Update the StackView with Single Possible Answer
+    ///Show and Update the StackView depend on the Question Type
     private func updateSingleStackView() {
         singleStackView.isHidden = false
         confirmAnswerButton.isHidden = true
-        setupButtonsStyle(buttonArray: singleButtons)
         for (button, answer) in zip(singleButtons, currentAnswer) {
             button.setTitle(answer.text, for: [])
         }
     }
-
+    
     private func updateMultipleStackView() {
         multipleStackView.isHidden = false
-        setupButtonsStyle(buttonArray: multipleButtons)
         for (button, answer) in zip(multipleButtons, currentAnswer) {
             button.setTitle(answer.text, for: [])
         }
@@ -121,12 +116,38 @@ class QuestionViewController: UIViewController {
         sliderLabels.last?.text = currentAnswer.last?.text
     }
     
+    private func updatePickerView() {
+        pickerStackView.isHidden = false
+        pickerView.subviews[1].backgroundColor = UIColor.yellow.withAlphaComponent(0.15)
+        
+        //Add answers from Question List to pickerView array
+        pickerAnswers = currentAnswer.compactMap { answer in
+            return answer.text
+        }
+        pickerView.delegate = self
+        pickerView.dataSource = self
+    }
     // FIXME: -Fix status bar!!! Don't forget to clean the answer list after getting the result!!!
     
+    // MARK: - View Elements Setup
+    /// Set the Background Image and Font Colours to Array of  Buttons
+    private func setupButtonsStyle(buttonArray: [UIButton]) {
+        for (index, button) in buttonArray.enumerated() {
+            button.setTitle(nil, for: [])
+            button.tag = index
+            button.setBackgroundImage(UIImage(named: "selectButton"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "selectButtonPressed"), for: .selected)
+            button.setTitleColor(.white, for: .selected)
+            button.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
+            button.tintColor = .black
+        }
+    }
+    
+    /// Calculate and setup the Sizes of Fonts, Colours and constraints for Confirm Button
     private func questionWindowSettings() {
         fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
         questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
-
+        
         //Setup colors
         navigationController?.navigationBar.barTintColor = UIColor(rgb: 0xA30EB3)
         view.backgroundColor = UIColor(rgb: 0x171723)
@@ -140,10 +161,13 @@ class QuestionViewController: UIViewController {
         confirmButtonHeightConstraint.constant = view.frame.maxY / 15
         questionLabelHeightConstraint.constant = view.frame.maxY / 10
         
-        //Setup Confirm Button
+        //Setup Buttons
         confirmAnswerButton.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
         confirmAnswerButton.setBackgroundImage(UIImage(named: "confirmButton"), for: .normal)
         confirmAnswerButton.setTitleColor(.white, for: [])
+        
+        setupButtonsStyle(buttonArray: singleButtons)
+        setupButtonsStyle(buttonArray: multipleButtons)
         
         //Setup slider Labels colors/font
         for label in sliderLabels {
@@ -151,23 +175,11 @@ class QuestionViewController: UIViewController {
             label.textColor = .white
         }
     }
-    
-    private func nextQuestion() {
-        print(answersChosen)
-        questionIndex += 1
-        if questionIndex < Question.all.count {
-            updateUI()
-        } else {
-            performSegue(withIdentifier: "Results Screen", sender: nil)
-        }
-    }
-    
+    // MARK: - Actions
     @IBAction func singleButtonPressed(_ sender: UIButton) {
         let index = sender.tag
         let answers = Question.all[questionIndex].answers
-        guard index >= 0 && index <= answers.count else {
-            return
-        }
+        guard index >= 0 && index <= answers.count else { return }
         let answerSelected = answers[index]
         answersChosen.append(answerSelected)
         nextQuestion()
@@ -176,8 +188,9 @@ class QuestionViewController: UIViewController {
     @IBAction func multipleButtonPressed(_ sender: UIButton) {
         sender.isSelected.toggle()
     }
+    
+    /// Append the Current Answer in Answers Array, depend on the type of the Question
     @IBAction func confirmAnswerPressed(_ sender: UIButton) {
-        
         switch currentQuestion.type {
         case .single:
             break
@@ -190,14 +203,37 @@ class QuestionViewController: UIViewController {
             }
         case .slider:
             answersChosen.append(currentAnswer[Int(slider.value)])
-        default:
-            fatalError()
+        case .picker:
+            answersChosen.append(currentAnswer[pickerView.selectedRow(inComponent: 0)])
         }
         nextQuestion()
-        }
+    }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         let roundStepValue = round(sender.value / 1) * 1
         sender.value = roundStepValue
+    }
+}
+
+// FIXME: Move to somewhere?!
+extension QuestionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return currentQuestion.answers.count
+    }
+    //Setup Text Color and Fonts in UIPicker
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            pickerLabel?.font = UIFont(name: "Thintel", size: fontSize)
+            pickerLabel?.textAlignment = .center
+        }
+        pickerLabel?.text = pickerAnswers[row]
+        pickerLabel?.textColor = .white
+        return pickerLabel!
     }
 }

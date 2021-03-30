@@ -19,7 +19,7 @@ struct Question {
             Answer(text: "Собака", person: .monica),
             Answer(text: "Кошка", person: .rachel)
         ].shuffled()),
-        Question(text: "Какой ваш любимый напиток?", type: .single, answers: [
+        Question(text: "Какой ваш любимый напиток?", type: .picker, answers: [
             Answer(text: "Айс Ти", person: .rose),
             Answer(text: "Черный кофе", person: .chandler),
             Answer(text: "Латте", person: .joey),
