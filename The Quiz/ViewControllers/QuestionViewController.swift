@@ -94,7 +94,7 @@ class QuestionViewController: UIViewController {
         }
         
     }
-    ///Show and Update the StackView depend on the Question Type
+    ///Show and Update the StackViews depend on the Question Type
     private func updateSingleStackView() {
         singleStackView.isHidden = false
         confirmAnswerButton.isHidden = true
@@ -207,6 +207,10 @@ class QuestionViewController: UIViewController {
             answersChosen.append(currentAnswer[pickerView.selectedRow(inComponent: 0)])
         }
         nextQuestion()
+    }
+    
+    @IBSegueAction func resultScreenSegue(_ coder: NSCoder) -> ResultViewController? {
+        return ResultViewController(coder: coder, answersChosen)
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {

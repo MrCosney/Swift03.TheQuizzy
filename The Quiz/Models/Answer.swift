@@ -7,5 +7,5 @@
 
 struct Answer {
     let text: String
-    let person: FriendType
+    let person: PokemonType
 }

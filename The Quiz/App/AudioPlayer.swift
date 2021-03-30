@@ -15,7 +15,7 @@ class Music {
     
     //Turn On the Background Music
     func play() {
-        guard let url = Bundle.main.url(forResource: "musicTheme", withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: "mainMusic", withExtension: "mp3") else { return }
         
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.soloAmbient)
