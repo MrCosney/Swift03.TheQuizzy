@@ -7,7 +7,7 @@
 
 enum PokemonType: String {
     case pikachu = "ПИКАЧУ"
-    case squirtle = " СКВИРТЛ"
+    case squirtle = "СКВИРТЛ"
     case charmander = "ЧАРМАНДЕР"
     case snorlaks = "СНОРЛАКС"
     case pidgey = "ПИДЖЕОТ"
