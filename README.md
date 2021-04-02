@@ -1,3 +1,5 @@
+<img src="https://github.com/MrCosney/Swift03.ThePokeQuiz/blob/main/Screenshots/HatImage.png" width="700">
+
 # The PokeQuiz
 This is my simple adaptation of the Pokemon-themed quiz. Quiz consists of 7 questions of different types, according to the results of which you can find out who you would be in the Pokemon world.
 
