@@ -52,6 +52,7 @@ class QuestionViewController: UIViewController {
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        answersChosen.removeAll()
         questionWindowSettings()
         updateUI()
     }
@@ -150,7 +151,7 @@ class QuestionViewController: UIViewController {
         
         //Setup colors
         navigationController?.navigationBar.barTintColor = UIColor(rgb: 0xA30EB3)
-        view.backgroundColor = UIColor(rgb: 0x171723)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "questionBackground.jpg")!)
         progressView.progressTintColor = UIColor(rgb: 0xA30EB3)
         
         //Setup Navigation Title

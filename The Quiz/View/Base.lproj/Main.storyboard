@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Какой ты покемон?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-9l-46e">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="А ты что за покемон?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-9l-46e">
                                 <rect key="frame" x="20" y="421" width="374" height="54.5"/>
                                 <fontDescription key="fontDescription" name="Thintel" family="Thintel" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -125,7 +125,7 @@
                                 <size key="shadowOffset" width="-2" height="2"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="24G-UL-v1j">
-                                <rect key="frame" x="30" y="368.5" width="354" height="105.5"/>
+                                <rect key="frame" x="30" y="362.5" width="354" height="117.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="oda-ZX-hcU">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -144,8 +144,8 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="FyL-fo-RBG" customClass="DesignableSlider" customModule="The_Quiz" customModuleProvider="target">
-                                        <rect key="frame" x="-2" y="20.5" width="358" height="36"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" value="1" minValue="0.0" maxValue="5" minimumValueImage="sliderMin" maximumValueImage="sliderMax" translatesAutoresizingMaskIntoConstraints="NO" id="FyL-fo-RBG" customClass="DesignableSlider" customModule="The_Quiz" customModuleProvider="target">
+                                        <rect key="frame" x="-2" y="20.5" width="358" height="48"/>
                                         <color key="tintColor" red="0.96988219019999999" green="0.74967473750000002" blue="0.030055584390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="minimumTrackTintColor" red="0.96988219019999999" green="0.74967473750000002" blue="0.030055584390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="maximumTrackTintColor" red="0.96988219019999999" green="0.74967473750000002" blue="0.030055584390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -159,7 +159,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGB-r4-iXF">
-                                        <rect key="frame" x="0.0" y="55.5" width="354" height="50"/>
+                                        <rect key="frame" x="0.0" y="67.5" width="354" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -369,7 +369,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bqZ-nZ-eyy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zgi-eb-tnF">
+                        <barButtonItem key="rightBarButtonItem" image="doneButtonImage" id="Zgi-eb-tnF">
+                            <color key="tintColor" systemColor="systemYellowColor"/>
                             <connections>
                                 <segue destination="hCp-C8-Upy" kind="unwind" unwindAction="unwind:" id="pMx-i6-iJh"/>
                             </connections>
@@ -416,15 +417,21 @@
     </scenes>
     <designables>
         <designable name="FyL-fo-RBG">
-            <size key="intrinsicContentSize" width="-1" height="35"/>
+            <size key="intrinsicContentSize" width="-1" height="47"/>
         </designable>
     </designables>
     <resources>
+        <image name="doneButtonImage" width="48" height="48"/>
         <image name="pokeLogo" width="993" height="426"/>
         <image name="pokeball" width="36" height="36"/>
         <image name="pokeballHL" width="36" height="36"/>
+        <image name="sliderMax" width="48" height="48"/>
+        <image name="sliderMin" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

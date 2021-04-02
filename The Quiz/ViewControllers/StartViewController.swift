@@ -25,7 +25,7 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Music.sharedInstance.play()
+        Music.sharedInstance.play()
         
         // Setup View Font size
         mainLabel.font = mainLabel.font.withSize(

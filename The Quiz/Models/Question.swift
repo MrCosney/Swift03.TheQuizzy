@@ -43,5 +43,29 @@ struct Question {
             Answer(text: "Я как ветер!", person: .pidgey),
             Answer(text: "Меня не остановить!", person: .pikachu)
         ]),
+        Question(text: "Какую музыку ты выберешь для вечеринки?", type: .single, answers: [
+            Answer(text: "Классическую", person: .pidgey),
+            Answer(text: "Никакой! Люблю тишину...", person: .snorlaks),
+            Answer(text: "Послушаем Rap!", person: .squirtle),
+            Answer(text: "Музыку?", person: .slowpoke),
+            Answer(text: "Хард рок!", person: .charmander),
+            Answer(text: "Электронную!", person: .pikachu)
+        ].shuffled()),
+        Question(text: "Какая погода тебе по душе?", type: .multiple, answers: [
+            Answer(text: "Теплую с ветерком!", person: .pidgey),
+            Answer(text: "Люблю зиму!", person: .snorlaks),
+            Answer(text: "Сильный ливень!", person: .squirtle),
+            Answer(text: "Погода?", person: .slowpoke),
+            Answer(text: "Обожаю жару!", person: .charmander),
+            Answer(text: "Люблю дождь с грозой!", person: .pikachu)
+        ].shuffled()),
+        Question(text: "Твой любимый вид спорта?", type: .picker, answers: [
+            Answer(text: "Скайдайвинг!", person: .pidgey),
+            Answer(text: "Ненавижу спорт!", person: .snorlaks),
+            Answer(text: "Плавание!", person: .squirtle),
+            Answer(text: "Спорт?", person: .slowpoke),
+            Answer(text: "Пляжный волейбол!", person: .charmander),
+            Answer(text: "Мото Гонки!", person: .pikachu)
+        ].shuffled()),
         ]
 }
