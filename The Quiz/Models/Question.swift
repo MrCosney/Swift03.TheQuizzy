@@ -67,5 +67,5 @@ struct Question {
             Answer(text: "Пляжный волейбол!", person: .charmander),
             Answer(text: "Мото Гонки!", person: .pikachu)
         ].shuffled()),
-        ]
+    ].shuffled()
 }
