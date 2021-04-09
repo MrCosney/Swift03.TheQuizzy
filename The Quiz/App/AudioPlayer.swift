@@ -10,7 +10,7 @@ import AVFoundation
 
 /// Class for control the Background Music Status
 class Music {
-    static let sharedInstance = Music()
+    static let shared = Music()
     private var player: AVAudioPlayer?
     
     //Turn On the Background Music

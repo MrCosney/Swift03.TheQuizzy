@@ -20,6 +20,7 @@ class QuestionViewController: UIViewController {
     }
     private var fontSize: CGFloat = 10
     private var pickerAnswers = [String()]
+    @IBOutlet weak var fontSizeCalcLabel: UILabel!
     private var questionIndex = 0
     
     
@@ -33,7 +34,6 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var sliderStackView: UIStackView!
     @IBOutlet weak var slider: UISlider!
-    @IBOutlet var sliderLabels: [UILabel]!
     
     @IBOutlet weak var pickerStackView: UIStackView!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -49,6 +49,12 @@ class QuestionViewController: UIViewController {
     // Height constraints for Confirm Button and Label
     @IBOutlet weak var questionLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var confirmButtonHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var sliderStackViewHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var pickerStackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var singleStackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var multipleStackViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,8 +119,6 @@ class QuestionViewController: UIViewController {
     
     private func updateSliderView() {
         sliderStackView.isHidden = false
-        sliderLabels.first?.text = currentAnswer.first?.text
-        sliderLabels.last?.text = currentAnswer.last?.text
     }
     
     private func updatePickerView() {
@@ -146,9 +150,8 @@ class QuestionViewController: UIViewController {
     
     /// Calculate and setup the Sizes of Fonts, Colours and constraints for Confirm Button
     private func questionWindowSettings() {
-        fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
-        questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 12))
-        
+        fontSize = min(fontSizeCalcLabel.frame.size.width, fontSizeCalcLabel.frame.size.height) / 15
+        questionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 3))
         //Setup colors
         navigationController?.navigationBar.barTintColor = UIColor(rgb: 0xA30EB3)
         view.backgroundColor = UIColor(patternImage: UIImage(named: "questionBackground.jpg")!)
@@ -161,7 +164,10 @@ class QuestionViewController: UIViewController {
         //Setup Constraints
         confirmButtonHeightConstraint.constant = view.frame.maxY / 15
         questionLabelHeightConstraint.constant = view.frame.maxY / 10
-        
+        sliderStackViewHeightConstraint.constant = view.frame.maxY / 3
+        pickerStackViewHeightConstraint.constant = view.frame.maxY / 3
+        singleStackViewHeightConstraint.constant = view.frame.maxY / 3
+        multipleStackViewHeightConstraint.constant = view.frame.maxY / 3
         //Setup Buttons
         confirmAnswerButton.titleLabel?.font = UIFont(name: "Thintel", size: fontSize)
         confirmAnswerButton.setBackgroundImage(UIImage(named: "confirmButton"), for: .normal)
@@ -169,12 +175,6 @@ class QuestionViewController: UIViewController {
         
         setupButtonsStyle(buttonArray: singleButtons)
         setupButtonsStyle(buttonArray: multipleButtons)
-        
-        //Setup slider Labels colors/font
-        for label in sliderLabels {
-            label.font = UIFont(name: "Thintel", size: fontSize)
-            label.textColor = .white
-        }
     }
     // MARK: - Actions
     @IBAction func singleButtonPressed(_ sender: UIButton) {

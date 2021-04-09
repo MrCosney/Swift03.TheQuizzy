@@ -71,14 +71,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		010EBCFC260A682E003BEDC3 /* Music&Fonts */ = {
+		010EBCFC260A682E003BEDC3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				0101522A260A7AE500BD8F0B /* 19783.ttf */,
 				01015226260A7A8700BD8F0B /* musicTheme.mp3 */,
 				01E09F352613AE720071DD00 /* mainMusic.mp3 */,
 			);
-			path = "Music&Fonts";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		010EBD02260A69CF003BEDC3 /* View */ = {
@@ -136,7 +136,7 @@
 			children = (
 				010EBD04260A6A0F003BEDC3 /* App */,
 				019D82DC260B8F21007B8B59 /* Models */,
-				010EBCFC260A682E003BEDC3 /* Music&Fonts */,
+				010EBCFC260A682E003BEDC3 /* Resources */,
 				010EBD02260A69CF003BEDC3 /* View */,
 				010EBCEF260A0D4A003BEDC3 /* ViewControllers */,
 			);

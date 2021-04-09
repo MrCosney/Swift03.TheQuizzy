@@ -25,7 +25,7 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Music.sharedInstance.play()
+        Music.shared.play()
         
         // Setup View Font size
         mainLabel.font = mainLabel.font.withSize(
@@ -51,10 +51,10 @@ class StartViewController: UIViewController {
     @IBAction func musicButtonPressed(_ sender: UIButton) {
         if musicIsOn {
             sender.setBackgroundImage(UIImage(named: "soundButtonOff"), for: [])
-            Music.sharedInstance.stop()
+            Music.shared.stop()
         } else {
             sender.setBackgroundImage(UIImage(named: "soundButtonOn"), for: [])
-            Music.sharedInstance.play()
+            Music.shared.play()
         }
         musicIsOn.toggle()
     }

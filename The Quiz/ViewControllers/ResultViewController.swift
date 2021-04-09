@@ -10,6 +10,7 @@ import UIKit
 class ResultViewController: UIViewController {
 
 
+    @IBOutlet weak var fontSizeCalcLabel: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pokemonNameLabel: UILabel!
@@ -29,11 +30,11 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup font size for Labels
-        let fontSize = min(view.bounds.size.width, view.bounds.size.height) / 12
-
-        pokemonNameLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 15))
+        let fontSize = min(fontSizeCalcLabel.frame.size.width, fontSizeCalcLabel.frame.size.height) / 12
+        print(view.frame.size.width, view.frame.size.height)
+        pokemonNameLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 10))
         pokemonNameLabel.textColor = .yellow
-        pokemonDescriptionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize + 5))
+        pokemonDescriptionLabel.font = UIFont(name: "Thintel", size: CGFloat(fontSize))
         
         imageViewHeightConstraint.constant = view.frame.height / 3
         navigationItem.hidesBackButton = true
