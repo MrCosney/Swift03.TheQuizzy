@@ -45,7 +45,7 @@ struct Question {
         ]),
         Question(text: "Какую музыку ты выберешь для вечеринки?", type: .single, answers: [
             Answer(text: "Классическую", person: .pidgey),
-            Answer(text: "Никакой! Люблю тишину...", person: .snorlaks),
+            Answer(text: "Люблю тишину!", person: .snorlaks),
             Answer(text: "Послушаем Rap!", person: .squirtle),
             Answer(text: "Музыку?", person: .slowpoke),
             Answer(text: "Хард рок!", person: .charmander),

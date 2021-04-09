@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01007E20260A7DF600DAB4DE /* HexColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007E1F260A7DF600DAB4DE /* HexColors.swift */; };
+		01007E20260A7DF600DAB4DE /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007E1F260A7DF600DAB4DE /* UIColor+Hex.swift */; };
 		01015224260A7A0800BD8F0B /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01015223260A7A0800BD8F0B /* AudioPlayer.swift */; };
 		01015227260A7A8700BD8F0B /* musicTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01015226260A7A8700BD8F0B /* musicTheme.mp3 */; };
 		0101522B260A7AE500BD8F0B /* 19783.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0101522A260A7AE500BD8F0B /* 19783.ttf */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01007E1F260A7DF600DAB4DE /* HexColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColors.swift; sourceTree = "<group>"; };
+		01007E1F260A7DF600DAB4DE /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		01015223260A7A0800BD8F0B /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		01015226260A7A8700BD8F0B /* musicTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = musicTheme.mp3; sourceTree = "<group>"; };
 		0101522A260A7AE500BD8F0B /* 19783.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 19783.ttf; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 				01A41D482608C3760090E8D0 /* SceneDelegate.swift */,
 				01A41D4F2608C3770090E8D0 /* Assets.xcassets */,
 				01A41D542608C3770090E8D0 /* Info.plist */,
-				01007E1F260A7DF600DAB4DE /* HexColors.swift */,
+				01007E1F260A7DF600DAB4DE /* UIColor+Hex.swift */,
 				01564F982613D13400AE245E /* DesignableSlider.swift */,
 			);
 			path = App;
@@ -218,7 +218,7 @@
 			files = (
 				010EBCE6260A04F2003BEDC3 /* ResultViewController.swift in Sources */,
 				01015224260A7A0800BD8F0B /* AudioPlayer.swift in Sources */,
-				01007E20260A7DF600DAB4DE /* HexColors.swift in Sources */,
+				01007E20260A7DF600DAB4DE /* UIColor+Hex.swift in Sources */,
 				01A41D4B2608C3760090E8D0 /* StartViewController.swift in Sources */,
 				01A41D472608C3760090E8D0 /* AppDelegate.swift in Sources */,
 				019D82E6260B9131007B8B59 /* Question.swift in Sources */,

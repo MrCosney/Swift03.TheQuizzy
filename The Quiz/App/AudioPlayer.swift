@@ -12,7 +12,6 @@ import AVFoundation
 class Music {
     static let shared = Music()
     private var player: AVAudioPlayer?
-    
     //Turn On the Background Music
     func play() {
         guard let url = Bundle.main.url(forResource: "mainMusic", withExtension: "mp3") else { return }
@@ -29,7 +28,6 @@ class Music {
             
         } catch { print("Background Music is not found") }
     }
-    
     //Stop the Background Music
     func stop() {
         player?.stop()
