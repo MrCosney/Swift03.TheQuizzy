@@ -8,6 +8,7 @@
 import UIKit
 
 class StartViewController: UIViewController {
+    // MARK: - Properties
     private var musicIsOn = true
     override var prefersStatusBarHidden: Bool {
         return true
@@ -19,7 +20,7 @@ class StartViewController: UIViewController {
     @IBOutlet weak var musicButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var musicButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var startButtonHeightConstraint: NSLayoutConstraint!
-    
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         Music.shared.play()
@@ -51,5 +52,8 @@ class StartViewController: UIViewController {
             Music.shared.play()
         }
         musicIsOn.toggle()
+    }
+    
+    @IBAction private func unwind(_ segue: UIStoryboardSegue) {
     }
 }

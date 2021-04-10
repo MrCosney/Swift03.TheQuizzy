@@ -38,12 +38,6 @@ class ResultViewController: UIViewController {
         calculateResult()
     }
     
-    private func updateUI(with resultedPokemon: PokemonType) {
-        pokemonNameLabel.text = "Ты - \(resultedPokemon.rawValue)!"
-        pokemonDescriptionLabel.text = resultedPokemon.description
-        imageView.image = UIImage(named: String(resultedPokemon.rawValue))
-    }
-    
     private func calculateResult() {
         let answersPoints = answers.reduce(into: [:]) { counts, answer in
             counts[answer.person, default: 0] += 1
@@ -51,4 +45,11 @@ class ResultViewController: UIViewController {
         let resultedPokemon = answersPoints.sorted { $0.value > $1.value }.first!.key
         updateUI(with: resultedPokemon)
     }
+    
+    private func updateUI(with resultedPokemon: PokemonType) {
+        pokemonNameLabel.text = "Ты - \(resultedPokemon.rawValue)!"
+        pokemonDescriptionLabel.text = resultedPokemon.description
+        imageView.image = UIImage(named: String(resultedPokemon.rawValue))
+    }
+    
 }
