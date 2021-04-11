@@ -10,6 +10,7 @@ import UIKit
 class StartViewController: UIViewController {
     // MARK: - Properties
     private var musicIsOn = true
+    private var player = Music.init()
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -23,7 +24,6 @@ class StartViewController: UIViewController {
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        Music.shared.play()
         // Setup View Font size
         mainLabel.font = mainLabel.font.withSize(
             min(view.bounds.size.width, view.bounds.size.height) / 7)
@@ -39,17 +39,16 @@ class StartViewController: UIViewController {
         let buttonSize = view.frame.maxX / 8
         musicButtonWidthConstraint.constant = buttonSize
         musicButtonHeightConstraint.constant = buttonSize
-        
         startButtonHeightConstraint.constant = view.frame.maxY / 10
     }
     /// Setup the Music Sound On/Off
     @IBAction func musicButtonPressed(_ sender: UIButton) {
         if musicIsOn {
             sender.setBackgroundImage(UIImage(named: "soundButtonOff"), for: [])
-            Music.shared.stop()
+            player.musicMute()
         } else {
             sender.setBackgroundImage(UIImage(named: "soundButtonOn"), for: [])
-            Music.shared.play()
+            player.musicPlay()
         }
         musicIsOn.toggle()
     }

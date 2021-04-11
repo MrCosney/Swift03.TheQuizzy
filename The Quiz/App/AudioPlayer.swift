@@ -7,14 +7,11 @@
 
 import AVFoundation
 
-
 /// Class for control the Background Music Status
 class Music {
-    static let shared = Music()
     private var player: AVAudioPlayer?
-    
     //Turn On the Background Music
-    func play() {
+    init() {
         guard let url = Bundle.main.url(forResource: "mainMusic", withExtension: "mp3") else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.soloAmbient)
@@ -28,7 +25,10 @@ class Music {
         } catch { print("Background Music is not found") }
     }
     //Stop the Background Music
-    func stop() {
-        player?.stop()
+    func musicPlay() {
+        player?.volume = 0.1
+    }
+    func musicMute() {
+        player?.volume = 0.0
     }
 }
